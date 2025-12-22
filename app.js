@@ -52,9 +52,11 @@ app.use(passport.session());
 
 const indexRouter = require("./routes/indexRouter");
 const authRouter = require("./routes/authRouter");
+const fileRouter = require("./routes/fileRouter");
 
 app.use("/", indexRouter);
 app.use("/", authRouter);
+app.use("/files", fileRouter);
 
 /**
  * -------------- ERROR HANDLING ----------------
