@@ -140,3 +140,6 @@ vite.config.ts.timestamp-*
 
 notes.txt
 /generated/prisma
+
+uploads/*
+!uploads/.gitkeep
