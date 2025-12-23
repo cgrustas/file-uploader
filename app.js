@@ -7,6 +7,7 @@ const passport = require("passport");
  */
 
 require("dotenv").config();
+const multer = require("multer");
 
 const app = express();
 
@@ -81,6 +82,13 @@ app.use("/folders", isAuthenticated, folderRouter);
 
 app.use((err, req, res, next) => {
   console.error(err);
+
+  if (err instanceof multer.MulterError) {
+    return res
+      .status(400)
+      .send(`${err.message}. <a href="/files/new">Try again</a>`);
+  }
+
   res.status(err.statusCode || 500).send(err.message);
 });
 
