@@ -1,0 +1,14 @@
+<table class="folders">
+  <thead>
+    <tr>
+      <th scope="col">Name</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% folders.forEach((folder) => { %>
+    <tr>
+      <td><a href="/folders/<%= folder.id %>"><%= folder.name %></a></td>
+    </tr>
+    <% }) %>
+  </tbody>
+</table>

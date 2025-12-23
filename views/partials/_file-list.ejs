@@ -1,0 +1,16 @@
+<table class="files">
+  <thead>
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Uploaded At</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% files.forEach((file) => { %>
+    <tr>
+      <td><a href="/files/<%= file.id %>"><%= file.originalname %></a></td>
+      <td><%= file.uploadedAt %></td>
+    </tr>
+    <% }) %>
+  </tbody>
+</table>

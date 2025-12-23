@@ -3,14 +3,14 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>File Uploader</title>
+    <title><%= title %></title>
   </head>
   <body>
     <h1>Log In</h1>
     <% if (errors.length > 0) { %>
     <ul>
-      <% for (const err of errors) { %>
-      <li><%= err %></li>
+      <% for (const error of errors) { %>
+      <li><%= err.msg %></li>
       <% } %>
     </ul>
     <% } %>
@@ -21,6 +21,6 @@
       <input id="password" name="password" type="password" />
       <button type="submit">Log In</button>
     </form>
-    <a href="/">Return to homepage</a>
+    <a href="/sign-up">Sign Up</a>
   </body>
 </html>

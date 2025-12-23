@@ -13,6 +13,8 @@ const app = express();
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 
+app.locals.title = "My Drive";
+
 app.use(express.urlencoded({ extended: true }));
 
 /**
@@ -28,8 +30,8 @@ app.use(
       maxAge: 7 * 24 * 60 * 60 * 1000, // ms
     },
     secret: process.env.SECRET,
-    resave: true,
-    saveUninitialized: true,
+    resave: false,
+    saveUninitialized: false,
     store: new PrismaSessionStore(prisma, {
       checkPeriod: 2 * 60 * 1000, //ms
       dbRecordIdIsSessionId: true,
@@ -53,10 +55,13 @@ app.use(passport.session());
 const indexRouter = require("./routes/indexRouter");
 const authRouter = require("./routes/authRouter");
 const fileRouter = require("./routes/fileRouter");
+const folderRouter = require("./routes/folderRouter");
+const isAuthenticated = require("./middleware/isAuthenticated.js");
 
-app.use("/", indexRouter);
 app.use("/", authRouter);
-app.use("/files", fileRouter);
+app.use("/", isAuthenticated, indexRouter);
+app.use("/files", isAuthenticated, fileRouter);
+app.use("/folders", isAuthenticated, folderRouter);
 
 /**
  * -------------- ERROR HANDLING ----------------

@@ -28,26 +28,19 @@ const createUser = [
       });
     }
 
-    try {
-      const hashedPassword = await bcrypt.hash(req.body.password, 10);
-      const userId = await userQueries.addUser(
-        req.body.username,
-        hashedPassword
-      );
-      const user = {
-        id: userId,
-        username: req.body.username,
-      };
+    const hashedPassword = await bcrypt.hash(req.body.password, 10);
+    const userId = await userQueries.addUser(req.body.username, hashedPassword);
+    const user = {
+      id: userId,
+      username: req.body.username,
+    };
 
-      req.login(user, function (err) {
-        if (err) {
-          return next(err);
-        }
-        res.redirect("/");
-      });
-    } catch (error) {
-      next(error);
-    }
+    req.login(user, function (err) {
+      if (err) {
+        return next(err);
+      }
+      res.redirect("/");
+    });
   },
 ];
 

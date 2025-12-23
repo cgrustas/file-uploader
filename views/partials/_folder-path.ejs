@@ -1,0 +1,5 @@
+<% folderPath.forEach((folder, index) => { %> <% if (folder.id) { %>
+<a href="/folders/<%= folder.id %>"><%= folder.name %></a>
+<% } else { %>
+<a href="/"><%= folder.name %></a>
+<% } %> <% if (index < folderPath.length - 1) { %> / <% } %> <% }) %>

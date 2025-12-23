@@ -7,8 +7,11 @@
   </head>
   <body>
     <h1><%- include('partials/_folder-path', { folderPath }) %></h1>
-    <a href="/files/new">Upload file</a>
-    <a href="/folders/new">New folder</a>
+    <a href="/files/new?folderId=<%= folderId %>">Upload file</a>
+    <a href="/folders/new?folderId=<%= folderId %>">New folder</a>
+    <form action="/folders/<%= folderId %>/delete" method="POST">
+      <button>Delete Folder</button>
+    </form>
     <a href="/log-out">Log Out</a>
     <div class="root-contents">
       <section class="folders">
