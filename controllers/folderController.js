@@ -2,7 +2,7 @@ const { body, validationResult } = require("express-validator");
 const folderQueries = require("../lib/folderQueries.js");
 const fileQueries = require("../lib/fileQueries.js");
 const NotFoundError = require("../errors/NotFoundError.js");
-const fs = require("fs/promises");
+const cloudinary = require("cloudinary").v2;
 
 function renderCreateFolderForm(req, res) {
   const action = "/folders/new";
@@ -54,8 +54,10 @@ async function deleteFolder(req, res, next) {
   const parentId = await folderQueries.getParentId(userId, folderId);
   const returnPath = parentId ? `/folders/${parentId}` : "/";
 
-  const filePaths = await folderQueries.getFilePathsRec(userId, folderId);
-  const deleteFiles = filePaths.map((path) => fs.unlink(path));
+  const publicIds = await folderQueries.getFilePublicIdsRec(userId, folderId);
+  const deleteFiles = publicIds.map((publicId) =>
+    cloudinary.uploader.destroy(publicId)
+  );
   await Promise.all(deleteFiles);
 
   await folderQueries.deleteFolder(userId, folderId);

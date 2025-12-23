@@ -8,7 +8,7 @@
   <tbody>
     <% files.forEach((file) => { %>
     <tr>
-      <td><a href="/files/<%= file.id %>"><%= file.originalname %></a></td>
+      <td><a href="/files/<%= file.id %>"><%= file.name %></a></td>
       <td><%= file.uploadedAt %></td>
     </tr>
     <% }) %>

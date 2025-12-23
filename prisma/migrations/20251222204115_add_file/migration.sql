@@ -1,7 +1,7 @@
 -- CreateTable
 CREATE TABLE "File" (
     "id" SERIAL NOT NULL,
-    "originalname" TEXT NOT NULL,
+    "name" TEXT NOT NULL,
     "filename" TEXT NOT NULL,
     "path" TEXT NOT NULL,
     "size" INTEGER NOT NULL,

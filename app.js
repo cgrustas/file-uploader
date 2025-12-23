@@ -29,7 +29,7 @@ app.use(
     cookie: {
       maxAge: 7 * 24 * 60 * 60 * 1000, // ms
     },
-    secret: process.env.SECRET,
+    secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
     store: new PrismaSessionStore(prisma, {
@@ -47,6 +47,18 @@ app.use(
 
 require("./config/passport");
 app.use(passport.session());
+
+/**
+ * -------------- CLOUD STORAGE ----------------
+ *
+ */
+const cloudinary = require("cloudinary").v2;
+
+cloudinary.config({
+  cloud_name: "dmvocarnk",
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
 
 /**
  * -------------- ROUTES ----------------
