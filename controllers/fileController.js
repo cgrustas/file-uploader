@@ -1,4 +1,3 @@
-const { body, validationResult } = require("express-validator");
 const fileQueries = require("../lib/fileQueries.js");
 const NotFoundError = require("../errors/NotFoundError.js");
 const BadRequestError = require("../errors/BadRequestError.js");
